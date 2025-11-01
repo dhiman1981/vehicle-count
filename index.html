@@ -29,6 +29,12 @@
       margin-top: 4px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      -moz-appearance: textfield;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     button {
       margin-top: 20px;
@@ -56,15 +62,15 @@
 
 <h2>Vehicle Count Report</h2>
 
-<label>Car:</label><input type="number" id="car" min="0" value="0">
-<label>Activa:</label><input type="number" id="activa" min="0" value="0">
-<label>Motorbike:</label><input type="number" id="motorbike" min="0" value="0">
-<label>Tractor Trolley:</label><input type="number" id="tractor" min="0" value="0">
-<label>Bus:</label><input type="number" id="bus" min="0" value="0">
-<label>Cruiser:</label><input type="number" id="cruiser" min="0" value="0">
-<label>Helpline Car:</label><input type="number" id="helpline" min="0" value="0">
-<label>Cycle:</label><input type="number" id="cycle" min="0" value="0">
-<label>Auto:</label><input type="number" id="auto" min="0" value="0">
+<label>Car:</label><input type="number" id="car" min="0" placeholder="Enter count">
+<label>Activa:</label><input type="number" id="activa" min="0" placeholder="Enter count">
+<label>Motorcycle:</label><input type="number" id="motorcycle" min="0" placeholder="Enter count">
+<label>Tractor Trolley:</label><input type="number" id="tractor" min="0" placeholder="Enter count">
+<label>Bus:</label><input type="number" id="bus" min="0" placeholder="Enter count">
+<label>Cruiser:</label><input type="number" id="cruiser" min="0" placeholder="Enter count">
+<label>Helpline Car:</label><input type="number" id="helpline" min="0" placeholder="Enter count">
+<label>Cycle:</label><input type="number" id="cycle" min="0" placeholder="Enter count">
+<label>Auto:</label><input type="number" id="auto" min="0" placeholder="Enter count">
 
 <button onclick="generateMessage()">Generate WhatsApp Message</button>
 
@@ -80,7 +86,7 @@
     const counts = {
       Car: n('car'),
       Activa: n('activa'),
-      Motorbike: n('motorbike'),
+      Motorcycle: n('motorcycle'),
       'Tractor Trolley': n('tractor'),
       Bus: n('bus'),
       Cruiser: n('cruiser'),
@@ -113,7 +119,7 @@
 
     // Build message
     let total = 0;
-    let message = `Radha Soami Ji 🙏\n\n Vehicle Count Report\n ${dateStr}\n\n`;
+    let message = `Radha Soami Ji 🙏\n\n🚗 Vehicle Count Report\n📅 ${dateStr}\n\n`;
     activeTypes.forEach(([type, count]) => {
       message += `${type}: ${count}\n`;
       total += count;
@@ -128,4 +134,3 @@
 
 </body>
 </html>
-
