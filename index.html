@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vehicle Count Report</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Count</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 520px; margin: auto; padding: 20px; background: #f9fafb; }
-    h2 { text-align: center; margin-bottom: 20px; color: #333; }
-    label { display: block; margin-top: 10px; font-weight: 500; color: #444; }
-    input { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 8px; }
-    button { margin-top: 20px; padding: 12px; width: 100%; background-color: #4CAF50; color: white; font-size: 16px; border: none; border-radius: 10px; cursor: pointer; }
-    button:hover { background-color: #45a049; }
-    .note { margin-top: 12px; font-size: 13px; color: #777; text-align: center; }
-    pre { background:#fff; border:1px solid #ddd; padding:10px; border-radius:8px; white-space:pre-wrap; margin-top:14px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      text-align: right;
+    }
+    input[type="date"] {
+      padding: 5px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
-
-<h2>Vehicle Count Report</h2>
-
-<label>Car:</label><input type="number" id="car" min="0" value="0">
-<label>Activa:</label><input type="number" id="activa" min="0" value="0">
-<label>Motorbike:</label><input type="number" id="motorbike" min="0" value="0">
-<label>Tractor Trolley:</label><input type="number" id="tractor" min="0" value="0">
-<label>Bus:</label><input type="number" id="bus" min="0" value="0">
-<label>Cruiser:</label><input type="number" id="cruiser" min="0" value="0">
-<label>Helpline Car:</label><input type="number" id="helpline" min="0" value="0">
-<label>Cycle:</label><input type="number" id="cycle" min="0" value="0">
-<label>Auto:</label><input type="number" id="auto" min="0" value="0">
-
-<button onclick="generateMessage()">Generate WhatsApp Message</button>
-<p class="note">Radha Soami Ji 🙏 | Day + date + time auto | Zero-count types hidden</p>
-
-<pre id="preview" aria-live="polite"></pre>
-
-<script>
-  function n(id){
-    const v = parseInt(document.getElementById(id).value, 10);
-    return Number.isFinite(v) && v > 0 ? v : 0;
-  }
-
-  function generateMessage() {
-    const counts = {
-      Car: n('car'),
-      Activa: n('activa'),
-      Motorbike: n('motorbike'),
-      'Tractor Trolley': n('tractor'),
-      Bus: n('bus'),
-      Cruiser: n('cruiser'),
-      'Helpline Car': n('helpline'),
-      Cycle: n('cycle'),
-      Auto: n('auto')
-    };
-
-    // keep only non-zero lines
-    const nonZero = Object.entries(counts).filter(([_, c]) => c > 0);
-
-    if (nonZero.length === 0) {
-      alert('Please enter at least one count > 0.');
-      return;
-    }
-
-    // India day name + date + time
-    const now = new Date();
-    const weekday = new Intl.DateTimeFormat('en-IN', { weekday: 'long', timeZone: 'Asia/Kolkata' }).format(now);
-    const datePart = new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' }).format(now);
-    const timePart = new Intl.DateTimeFormat('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata' }).format(now);
-    const stamp = `${weekday}, ${datePart} ${timePart}`;
-
-    let total = 0;
-    let message = `Radha Soami Ji 🙏\n\n🚗 Vehicle Count Report\n📅 ${stamp}\n\n`;
-    nonZero.forEach(([k, v]) => { message += `${k}: ${v}\n`; total += v; });
-    message += `\n✅ Total: ${total}`;
-
-    // show preview on page so you can confirm changes
-    document.getElementById('preview').textContent = message;
-
-    // open WhatsApp (mobile friendly)
-    const encoded = encodeURIComponent(message);
-    window.location.href = `https://api.whatsapp.com/send?text=${encoded}`;
-  }
-</script>
-
+  <div class="container">
+    <h1>Vehicle Count Tracker</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Car</th>
+          <th>Motorcycle</th>
+          <th>Bus</th>
+          <th>Truck</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="date" id="date1"></td>
+          <td><input type="number" id="car1" value="" placeholder=""></td>
+          <td><input type="number" id="motorcycle1" value="" placeholder=""></td>
+          <td><input type="number" id="bus1" value="" placeholder=""></td>
+          <td><input type="number" id="truck1" value="" placeholder=""></td>
+        </tr>
+        <tr>
+          <td><input type="date" id="date2"></td>
+          <td><input type="number" id="car2" value="" placeholder=""></td>
+          <td><input type="number" id="motorcycle2" value="" placeholder=""></td>
+          <td><input type="number" id="bus2" value="" placeholder=""></td>
+          <td><input type="number" id="truck2" value="" placeholder=""></td>
+        </tr>
+        <!-- Add more rows as needed -->
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
