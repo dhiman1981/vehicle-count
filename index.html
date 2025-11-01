@@ -113,7 +113,7 @@
 
     // Build message
     let total = 0;
-    let message = `Radha Soami Ji 🙏\n\n🚗 Vehicle Count Report\n📅 ${dateStr}\n\n`;
+    let message = `Radha Soami Ji 🙏\n\n Vehicle Count Report\n ${dateStr}\n\n`;
     activeTypes.forEach(([type, count]) => {
       message += `${type}: ${count}\n`;
       total += count;
@@ -128,3 +128,4 @@
 
 </body>
 </html>
+
